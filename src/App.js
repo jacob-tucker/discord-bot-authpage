@@ -15,7 +15,7 @@ function App(props) {
     let params = new URLSearchParams(search);
     let id = params.get('id');
 
-    const response = await fetch('/api/join', {
+    const response = await fetch('https://damp-ridge-15827.herokuapp.com/api/join', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
