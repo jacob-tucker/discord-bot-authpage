@@ -2,7 +2,7 @@
   "name": "bloctosignin",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://damp-ridge-15827.herokuapp.com/",
+  "proxy": "https://damp-ridge-15827.herokuapp.com",
   "dependencies": {
     "@onflow/fcl": "0.0.78-alpha.6",
     "@onflow/types": "^0.0.5",
