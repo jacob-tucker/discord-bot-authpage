@@ -4,7 +4,7 @@ import * as fcl from '@onflow/fcl';
 
 fcl.config()
   .put('accessNode.api', 'https://access-testnet.onflow.org')
-  .put('discovery.wallet', 'https://flow-wallet-testnet.blocto.app/api/flow/authn');
+  .put('discovery.wallet', 'https://flow-wallet-testnet.blocto.app/authn');
 
 function App(props) {
   const [user, setUser] = useState();
