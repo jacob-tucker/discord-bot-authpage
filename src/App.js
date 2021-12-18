@@ -14,13 +14,14 @@ function App(props) {
     let search = window.location.search;
     let params = new URLSearchParams(search);
     let id = params.get('id');
+    let guildID = params.get('guildID');
 
     const response = await fetch('https://damp-ridge-15827.herokuapp.com/api/join', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ user, uuid: id }),
+      body: JSON.stringify({ user, uuid: id, guildID: guildID }),
     });
   }
 
