@@ -14,7 +14,7 @@ function Mainnet(props) {
 
     useEffect(() => {
         if (flow.user && flow.user.addr) {
-            flow.sendAuthPOST();
+            flow.sendAuthPOST("mainnet");
         }
     }, [flow.user]);
 

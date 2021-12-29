@@ -14,7 +14,7 @@ function Provider(props) {
         }
     }
 
-    const sendAuthPOST = async () => {
+    const sendAuthPOST = async (network) => {
         // Gets the id in the URL
         let search = window.location.search;
         let params = new URLSearchParams(search);
@@ -27,7 +27,7 @@ function Provider(props) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user, uuid: id, guildID: guildID }),
+            body: JSON.stringify({ user, uuid: id, guildID: guildID, network }),
         });
     }
 

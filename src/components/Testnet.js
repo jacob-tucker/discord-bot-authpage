@@ -14,7 +14,7 @@ function Testnet(props) {
 
     useEffect(() => {
         if (flow.user && flow.user.addr) {
-            flow.sendAuthPOST();
+            flow.sendAuthPOST("testnet");
         }
     }, [flow.user]);
 
