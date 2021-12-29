@@ -1,52 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import * as fcl from '@onflow/fcl';
 
-fcl.config()
-  .put('accessNode.api', 'https://access-testnet.onflow.org')
-  .put('discovery.wallet', 'https://flow-wallet-testnet.blocto.app/authn');
+import { Provider as FlowContextProvider } from './context/FlowContext.js';
 
-function App(props) {
-  const [user, setUser] = useState();
+import Mainnet from './components/Mainnet.js';
+import Testnet from './components/Testnet.js';
 
-  const getBalance = async () => {
-    // Gets the id in the URL
-    let search = window.location.search;
-    let params = new URLSearchParams(search);
-    let id = params.get('id');
-    let guildID = params.get('guildID');
-
-    const response = await fetch('https://damp-ridge-15827.herokuapp.com/api/join', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ user, uuid: id, guildID: guildID }),
-    });
-  }
-
-  useEffect(() => {
-    fcl.currentUser().subscribe(setUser);
-  }, [])
-
-  useEffect(() => {
-    if (user && user.addr) {
-      getBalance();
-    }
-  }, [user]);
-
-  const authentication = async () => {
-    if (user.addr) {
-      fcl.unauthenticate();
-    } else {
-      fcl.authenticate();
-    }
-  }
-
+function App() {
   return (
-    <div className="App">
-      <h1>{user && user.addr ? "You can close your browser now." : null}</h1>
-      <button className="button-9" onClick={() => authentication()}>{user && !user.addr ? "Log in with Blocto" : "Log out"}</button>
+    <div>
+      <FlowContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/mainnet" element={<Mainnet />} />
+            <Route path="/testnet" element={<Testnet />} />
+          </Routes>
+        </BrowserRouter>
+      </FlowContextProvider>
     </div>
   );
 }
