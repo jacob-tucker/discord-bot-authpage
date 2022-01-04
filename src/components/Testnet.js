@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import '../App.css';
 import * as fcl from '@onflow/fcl';
 import FlowContext from '../context/FlowContext';
@@ -20,9 +20,9 @@ function Testnet(props) {
 
     return (
         <div className="App">
-            <h1>{flow.user.loggedIn && success 
+            <h1>{flow.user.loggedIn && flow.success 
                     ? "Successfully verified." 
-                    : flow.user.loggedIn && !success
+                    : flow.user.loggedIn && !flow.success
                     ? "Verification failed."
                     : null 
                 }
