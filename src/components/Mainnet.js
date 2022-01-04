@@ -20,9 +20,9 @@ function Mainnet(props) {
 
     return (
         <div className="App">
-            {flow.user && flow.user.loggedIn && (flow.success == 1)
+            {flow.user && flow.user.loggedIn && (flow.success === 1)
                 ? <h1 className="green">Successfully verified.</h1>
-                : flow.user && flow.user.loggedIn && (flow.success == 2)
+                : flow.user && flow.user.loggedIn && (flow.success === 2)
                 ? <h1 className="red">Verification failed.</h1>
                 : null 
             }
