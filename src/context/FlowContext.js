@@ -19,7 +19,6 @@ function Provider(props) {
         let search = window.location.search;
         let params = new URLSearchParams(search);
         let id = params.get('id');
-        let guildID = params.get('guildID');
 
         console.log(user)
         const response = await fetch('https://damp-ridge-15827.herokuapp.com/api/join', {
@@ -27,7 +26,7 @@ function Provider(props) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user, uuid: id, guildID: guildID, network }),
+            body: JSON.stringify({ user, id, network }),
         });
     }
 
