@@ -20,7 +20,7 @@ function Mainnet(props) {
 
     return (
         <div className="App">
-            <h1>{flow.user.loggedIn && flow.success 
+            <h1>{flow.user && flow.user.loggedIn && flow.success 
                     ? "Successfully verified." 
                     : flow.user.loggedIn && !flow.success
                     ? "Verification failed."
