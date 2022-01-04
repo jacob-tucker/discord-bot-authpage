@@ -27,7 +27,7 @@ function Testnet(props) {
                     : null 
                 }
             </h1>
-            <button className="button-9" onClick={() => flow.authentication()}>{flow.user && !flow.user.addr ? "Log in with Blocto" : "Log out"}</button>
+            <button className="button-9" onClick={() => flow.authentication()}>{flow.user && !flow.user.loggedIn ? "Log in with Blocto" : "Log out"}</button>
         </div>
     );
 }
