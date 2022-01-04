@@ -5,7 +5,6 @@ import FlowContext from '../context/FlowContext';
 
 function Testnet(props) {
     const flow = useContext(FlowContext);
-    const [success, setSuccess] = useState(null);
 
     useEffect(() => {
         fcl.currentUser().subscribe(flow.setUser);
@@ -15,8 +14,7 @@ function Testnet(props) {
 
     useEffect(() => {
         if (flow.user && flow.user.addr) {
-            let success = await flow.sendAuthPOST("testnet");
-            setSuccess(success);
+            flow.sendAuthPOST("testnet");
         }
     }, [flow.user]);
 

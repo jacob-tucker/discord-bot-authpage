@@ -5,6 +5,7 @@ const Context = React.createContext({});
 
 function Provider(props) {
     const [user, setUser] = useState();
+    const [success, setSuccess] = useState(null);
 
     const authentication = async () => {
         if (user && user.addr) {
@@ -30,10 +31,8 @@ function Provider(props) {
         });
         console.log(response);
 
-        response.json().then(data => {
-            console.log(data);
-            return data.success;
-        })
+        let data = await response.json();
+        setSuccess(data.success);
     }
 
     useEffect(() => {
@@ -47,7 +46,8 @@ function Provider(props) {
                 user,
                 setUser,
                 authentication,
-                fcl
+                fcl,
+                success
             }}
         >
             {props.children}

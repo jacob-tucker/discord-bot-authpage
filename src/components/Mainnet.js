@@ -5,7 +5,6 @@ import FlowContext from '../context/FlowContext';
 
 function Mainnet(props) {
     const flow = useContext(FlowContext);
-    const [success, setSuccess] = useState(null);
 
     useEffect(() => {
         fcl.currentUser().subscribe(flow.setUser);
@@ -15,16 +14,15 @@ function Mainnet(props) {
 
     useEffect(() => {
         if (flow.user && flow.user.addr) {
-            let success = await flow.sendAuthPOST("mainnet");
-            setSuccess(success);
+            flow.sendAuthPOST("mainnet");
         }
     }, [flow.user]);
 
     return (
         <div className="App">
-            <h1>{flow.user.loggedIn && success 
+            <h1>{flow.user.loggedIn && flow.success 
                     ? "Successfully verified." 
-                    : flow.user.loggedIn && !success
+                    : flow.user.loggedIn && !flow.success
                     ? "Verification failed."
                     : null 
                 }
