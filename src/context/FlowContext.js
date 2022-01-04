@@ -28,6 +28,12 @@ function Provider(props) {
             },
             body: JSON.stringify({ user, id, network }),
         });
+        console.log(response);
+
+        response.json().then(data => {
+            console.log(data);
+            return data.success;
+        })
     }
 
     useEffect(() => {
