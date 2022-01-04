@@ -20,13 +20,12 @@ function Mainnet(props) {
 
     return (
         <div className="App">
-            <h1>{flow.user && flow.user.loggedIn && (flow.success == 1)
-                    ? "Successfully verified." 
-                    : flow.user && flow.user.loggedIn && (flow.success == 2)
-                    ? "Verification failed."
-                    : null 
-                }
-            </h1>
+            {flow.user && flow.user.loggedIn && (flow.success == 1)
+                ? <h1 className="green">Successfully verified.</h1>
+                : flow.user && flow.user.loggedIn && (flow.success == 2)
+                ? <h1 className="red">Verification failed.</h1>
+                : null 
+            }
             <button className="button-9" onClick={() => flow.authentication()}>{flow.user && !flow.user.loggedIn ? "Log in with Blocto" : "Log out"}</button>
         </div>
     );

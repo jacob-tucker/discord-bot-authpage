@@ -53,3 +53,11 @@
   text-decoration: none;
   font-family: sans-serif;
 }
+
+.green {
+  background-color: #46d69a;
+}
+
+.red {
+  background-color: rgb(206, 67, 67);
+}
