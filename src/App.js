@@ -5,6 +5,7 @@ import { Provider as FlowContextProvider } from './context/FlowContext.js';
 
 import Mainnet from './components/Mainnet.js';
 import Testnet from './components/Testnet.js';
+import EmeraldID from './components/EmeraldID.js';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <FlowContextProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="/emeraldID" element={<EmeraldID />} />
             <Route path="/mainnet" element={<Mainnet />} />
             <Route path="/testnet" element={<Testnet />} />
           </Routes>

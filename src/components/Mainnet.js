@@ -10,7 +10,7 @@ function Mainnet(props) {
         fcl.currentUser().subscribe(flow.setUser);
         fcl.config()
             .put('discovery.wallet', 'https://flow-wallet.blocto.app/authn')
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (flow.user && flow.user.addr) {
