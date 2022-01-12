@@ -36,7 +36,7 @@ function EmeraldID(props) {
         setStatus("blue");
         let response = await flow.createEmeraldID();
         if (response === 'Success') {
-            setMessage('You have set up your EmeraldID.');
+            setMessage('Success! Please go back to Discord and click `Verify` again.');
             setStatus("green");
         } else {
             setMessage(response);
