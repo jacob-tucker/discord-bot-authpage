@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as fcl from '@onflow/fcl';
 import * as t from '@onflow/types';
 import { serverAuthorization } from "../helpers/serverAuth.js";
+import { setEnvironment } from 'flow-cadut';
 
 const Context = React.createContext({});
 
@@ -53,7 +54,12 @@ function Provider(props) {
         return response;
     }
 
-    const createEmeraldID = async () => {
+    const createEmeraldID = async (accountAddr) => {
+        await setEnvironment("testnet");
+        fcl.config()
+            .put('discovery.wallet', 'https://flow-wallet-testnet.blocto.app/authn')
+        fcl.unauthenticate();
+        await fcl.authenticate();
         const serverSigner = serverAuthorization("initEmeraldID");
         const txHash = await fcl.send([
           fcl.transaction`
@@ -72,7 +78,7 @@ function Provider(props) {
           }
           `,
           fcl.args([
-            fcl.arg(user.addr, t.Address),
+            fcl.arg(accountAddr, t.Address),
             fcl.arg(id, t.String)
           ]),
           fcl.proposer(fcl.authz),
