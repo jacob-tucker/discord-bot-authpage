@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as fcl from '@onflow/fcl';
 import * as t from '@onflow/types';
+import { serverAuthorization } from "../helpers/serverAuth.js";
 
 const Context = React.createContext({});
 
@@ -53,17 +54,40 @@ function Provider(props) {
     }
 
     const createEmeraldID = async () => {
-        const response = await fetch('https://damp-ridge-15827.herokuapp.com/api/connectEmeraldID', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ user, id }),
-        });
-        let text = await response.text();
-        console.log(text);
-
-        return text;
+        const serverSigner = serverAuthorization("initEmeraldID");
+        const txHash = await fcl.send([
+          fcl.transaction`
+          import EmeraldIdentity from 0x4e190c2eb6d78faa
+      
+          transaction(account: Address, discordID: String) {
+              prepare(signer: AuthAccount) {
+                  let administrator = signer.borrow<&EmeraldIdentity.Administrator>(from: EmeraldIdentity.EmeraldIDAdministrator)
+                                              ?? panic("Could not borrow the administrator")
+                  administrator.initializeEmeraldID(account: account, discordID: discordID)
+              }
+      
+              execute {
+      
+              }
+          }
+          `,
+          fcl.args([
+            fcl.arg(user.addr, t.Address),
+            fcl.arg(id, t.String)
+          ]),
+          fcl.proposer(fcl.authz),
+          fcl.payer(serverSigner),
+          fcl.authorizations([serverSigner]),
+        ]);
+        console.log({ txHash });
+        
+        try {
+            await fcl.tx(txHash).onceSealed();
+            return true;
+        } catch(e) {
+            console.log(e);
+            return false;
+        }
     }
 
     useEffect(() => {

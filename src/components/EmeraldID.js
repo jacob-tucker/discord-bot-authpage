@@ -17,9 +17,9 @@ function EmeraldID(props) {
     useEffect(() => {
         if (flow.user && flow.user.loggedIn) {
             const wrap = async () => {
-                let setup = await flow.checkEmeraldID();
-                console.log(setup);
-                if (!setup) {
+                const exists = await flow.checkEmeraldID();
+                console.log(exists);
+                if (!exists) {
                     createEmeraldID();
                 } else {
                     setMessage("You have already set up your EmeraldID :)");
@@ -34,15 +34,15 @@ function EmeraldID(props) {
     const createEmeraldID = async () => {
         setMessage('Setting up your EmeraldID. Please wait ~30 seconds.');
         setStatus("blue");
-        let response = await flow.createEmeraldID();
-        if (response === 'Success') {
+        let result = await flow.createEmeraldID();
+        if (result) {
             setMessage('Success! Please go back to Discord and click `Verify` again.');
             setStatus("green");
         } else {
-            setMessage(response);
+            setMessage('Failed to create EmeraldID.');
             setStatus("red");
         }
-    }
+    };
 
     return (
         <div className="App">
