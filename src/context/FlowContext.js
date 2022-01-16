@@ -55,42 +55,18 @@ function Provider(props) {
     }
 
     const createEmeraldID = async () => {
-        const serverSigner = serverAuthorization("initEmeraldID", user);
-        await setEnvironment("testnet");
-        
-        const txHash = await fcl.send([
-          fcl.transaction`
-          import EmeraldIdentity from 0x4e190c2eb6d78faa
-      
-          transaction(account: Address, discordID: String) {
-              prepare(admin: AuthAccount) {
-                  let administrator = admin.borrow<&EmeraldIdentity.Administrator>(from: EmeraldIdentity.EmeraldIDAdministrator)
-                                              ?? panic("Could not borrow the administrator")
-                  administrator.initializeEmeraldID(account: account, discordID: discordID)
-              }
-      
-              execute {
-      
-              }
-          }
-          `,
-          fcl.args([
-              fcl.arg(user.addr, t.Address),
-              fcl.arg(id, t.String)
-          ]),
-          fcl.proposer(serverSigner),
-          fcl.payer(serverSigner),
-          fcl.authorizations([serverSigner]),
-        ]);
-        console.log({ txHash });
-        
-        try {
-            await fcl.tx(txHash).onceSealed();
-            return true;
-        } catch(e) {
-            console.log(e);
-            return false;
-        }
+        const response = await fetch('https://damp-ridge-15827.herokuapp.com/api/sign', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user, id }),
+        });
+        console.log(response);
+
+        let data = await response.stringify();
+        console.log(data);
+        return data === 'OK';
     }
 
     useEffect(() => {

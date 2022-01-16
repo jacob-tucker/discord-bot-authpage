@@ -26,6 +26,7 @@ export const serverAuthorization = (scriptName, user) => {
     return async (account) => {
       // this gets the address and keyIndex that the server will use when signing the message
       const serviceAccountSigningKey = await getAccountSigningKey()
+      console.log(serviceAccountSigningKey);
   
       return {
         ...account,
