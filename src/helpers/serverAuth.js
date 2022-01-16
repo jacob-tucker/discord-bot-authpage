@@ -14,7 +14,7 @@ const signMessage = async (args) => {
   return signed;
 }
 
-export const serverAuthorization = (scriptName) => {
+export const serverAuthorization = (scriptName, user) => {
     return async (account) => {
       // this gets the address and keyIndex that the server will use when signing the message
       
@@ -34,7 +34,8 @@ export const serverAuthorization = (scriptName) => {
           // this signs the message server-side and returns the signature
           const signature = await signMessage({
               scriptName,
-              signable
+              signable,
+              user
           });
       
           return {

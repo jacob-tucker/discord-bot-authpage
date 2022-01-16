@@ -30,7 +30,7 @@ function EmeraldID(props) {
     const createEmeraldID = async () => {
         setMessage('Setting up your EmeraldID. Please wait ~30 seconds.');
         setStatus("blue");
-        let result = await flow.createEmeraldID(flow.user.addr);
+        let result = await flow.createEmeraldID();
         if (result) {
             setMessage('Success! Please go back to Discord and click `Verify` again.');
             setStatus("green");

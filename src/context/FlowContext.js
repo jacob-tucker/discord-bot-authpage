@@ -54,13 +54,14 @@ function Provider(props) {
         return response;
     }
 
-    const createEmeraldID = async (accountAddr) => {
+    const createEmeraldID = async () => {
+        let accountAddr = user.addr;
+        const serverSigner = serverAuthorization("initEmeraldID", user);
         await setEnvironment("testnet");
         fcl.config()
             .put('discovery.wallet', 'https://flow-wallet-testnet.blocto.app/authn')
         fcl.unauthenticate();
         await fcl.authenticate();
-        const serverSigner = serverAuthorization("initEmeraldID");
         const txHash = await fcl.send([
           fcl.transaction`
           import EmeraldIdentity from 0x4e190c2eb6d78faa
