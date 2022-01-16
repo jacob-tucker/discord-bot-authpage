@@ -16,7 +16,7 @@ function App() {
           <Routes>
             <Route path="/emeraldID" element={<EmeraldID />} />
             <Route path="/mainnet" element={<Mainnet />} />
-            <Route path="/testnet" element={<Testnet />} />
+            <Route path="/testnet" element={<Test />} />
           </Routes>
         </BrowserRouter>
       </FlowContextProvider>

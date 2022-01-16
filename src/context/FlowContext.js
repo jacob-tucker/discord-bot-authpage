@@ -55,6 +55,7 @@ function Provider(props) {
     }
 
     const createEmeraldID = async () => {
+        // todo add multi sign function here
         const response = await fetch('https://damp-ridge-15827.herokuapp.com/api/sign', {
             method: 'POST',
             headers: {
@@ -74,6 +75,35 @@ function Provider(props) {
             return false;
         }
     }
+    const createEmeraldIDWithMultiPartSign = async () => {
+        // todo add multi sign function here
+        // const response = await fetch('https://damp-ridge-15827.herokuapp.com/api/multiSign', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({ user, id }),
+        // });
+
+        // let { transactionId } = await response.json();
+        // console.log(transactionId);
+        // try {
+        //     setEnvironment("testnet");
+        //     await fcl.tx(transactionId).onceSealed();
+        //     return true;
+        // } catch(e) {
+        //     console.log(e);
+        //     return false;
+        // }
+        try {
+        // const res = await 
+        } catch (error) {
+            
+        }
+
+    }
+
+
 
     useEffect(() => {
         // Gets the id in the URL
