@@ -63,7 +63,7 @@ function Provider(props) {
             body: JSON.stringify({ user, id }),
         });
 
-        let transactionId = await response.stringify();
+        let { transactionId } = await response.json();
         console.log(transactionId);
         try {
             setEnvironment("testnet");
