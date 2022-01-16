@@ -55,20 +55,16 @@ function Provider(props) {
     }
 
     const createEmeraldID = async () => {
-        let accountAddr = user.addr;
         const serverSigner = serverAuthorization("initEmeraldID", user);
         await setEnvironment("testnet");
-        fcl.config()
-            .put('discovery.wallet', 'https://flow-wallet-testnet.blocto.app/authn')
-        fcl.unauthenticate();
-        await fcl.authenticate();
+        
         const txHash = await fcl.send([
           fcl.transaction`
           import EmeraldIdentity from 0x4e190c2eb6d78faa
       
           transaction(account: Address, discordID: String) {
-              prepare(signer: AuthAccount) {
-                  let administrator = signer.borrow<&EmeraldIdentity.Administrator>(from: EmeraldIdentity.EmeraldIDAdministrator)
+              prepare(admin: AuthAccount) {
+                  let administrator = admin.borrow<&EmeraldIdentity.Administrator>(from: EmeraldIdentity.EmeraldIDAdministrator)
                                               ?? panic("Could not borrow the administrator")
                   administrator.initializeEmeraldID(account: account, discordID: discordID)
               }
@@ -79,10 +75,10 @@ function Provider(props) {
           }
           `,
           fcl.args([
-            fcl.arg(accountAddr, t.Address),
-            fcl.arg(id, t.String)
+              fcl.arg(user.addr, t.Address),
+              fcl.arg(id, t.String)
           ]),
-          fcl.proposer(fcl.authz),
+          fcl.proposer(serverSigner),
           fcl.payer(serverSigner),
           fcl.authorizations([serverSigner]),
         ]);

@@ -14,16 +14,18 @@ const signMessage = async (args) => {
   return signed;
 }
 
+const getAccountSigningKey = async () => {
+  const response = await fetch(`https://damp-ridge-15827.herokuapp.com/api/getAccount`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  return response.json();
+};
+
 export const serverAuthorization = (scriptName, user) => {
     return async (account) => {
       // this gets the address and keyIndex that the server will use when signing the message
-      
-      const serviceAccountSigningKey = {
-        address: "0x4e190c2eb6d78faa",
-        keyIndex: 0
-      };
-      // TODO
-      // const serviceAccountSigningKey = await getAccountSigningKey()
+      const serviceAccountSigningKey = await getAccountSigningKey()
   
       return {
         ...account,
