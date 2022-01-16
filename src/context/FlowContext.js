@@ -62,11 +62,17 @@ function Provider(props) {
             },
             body: JSON.stringify({ user, id }),
         });
-        console.log(response);
 
-        let data = await response.stringify();
-        console.log(data);
-        return data === 'OK';
+        let transactionId = await response.stringify();
+        console.log(transactionId);
+        try {
+            setEnvironment("testnet");
+            await fcl.tx(transactionId).onceSealed();
+            return true;
+        } catch(e) {
+            console.log(e);
+            return false;
+        }
     }
 
     useEffect(() => {
