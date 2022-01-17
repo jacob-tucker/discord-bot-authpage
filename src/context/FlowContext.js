@@ -13,6 +13,7 @@ function Provider(props) {
     const [user, setUser] = useState();
     const [success, setSuccess] = useState(null);
     const [id, setID] = useState(null);
+    const [transactionStatus, setTransactionStatus] = useState(-1);
 
     const authentication = async () => {
         if (user && user.addr) {
@@ -67,11 +68,11 @@ function Provider(props) {
         console.log(transactionId);
         try {
             setEnvironment("testnet");
-            await fcl.tx(transactionId).onceSealed();
-            return true;
+            fcl.tx(transactionId).subscribe((res) => { console.log(res.status, 'createEmeraldId'); return setTransactionStatus(res.status);  })
+            return fcl.tx(transactionId).onceSealed();
         } catch(e) {
             console.log(e);
-            return false;
+            return false
         }
     }
 
@@ -92,7 +93,8 @@ function Provider(props) {
                 fcl,
                 success,
                 checkEmeraldID,
-                createEmeraldID
+                createEmeraldID,
+                transactionStatus
             }}
         >
             {props.children}
