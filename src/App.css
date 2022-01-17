@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css");
+
 html, body{
   padding: 0;
   margin: 0;
@@ -127,6 +129,8 @@ footer{
   width: 100%;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 footer::after{
@@ -257,7 +261,7 @@ i:hover{
   100% { transform: rotate(360deg); }
 }
 
-
+/*
 @media screen and (max-width: 456px) {
   header > h1{
       font-size: 20px;
@@ -312,7 +316,7 @@ i:hover{
       font-size: 20px;
   }
 }
-
+*/
 
 
 

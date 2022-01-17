@@ -17,6 +17,7 @@ function App() {
       <FlowContextProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<SuccessContainer />} />
             <Route path="/emeraldID" element={<EmeraldID />} />
             <Route path="/mainnet" element={<Mainnet />} />
             <Route path="/testnet" element={<Testnet />} />

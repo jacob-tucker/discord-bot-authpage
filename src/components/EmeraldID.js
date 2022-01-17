@@ -53,7 +53,14 @@ function EmeraldID(props) {
             {flow.user && flow.user.loggedIn && status === ""
                 ? <button className="button-9 green" onClick={() => doStuff()}>Create EmeraldID</button> 
                 : null}
-            <button className="button-9" onClick={() => flow.authentication()}>{flow.user && !flow.user.loggedIn ? "Log in with Blocto" : "Log out"}</button>
+
+            {flow.user && !flow.user.loggedIn && status === "" 
+                ? <button className="button-9" onClick={() => flow.authentication()}>
+                    Log in with Blocto
+                  </button> 
+                : null
+            }
+            
         </div>
     );
 }
