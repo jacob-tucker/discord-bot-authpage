@@ -2,11 +2,14 @@ import React, { useEffect, useState, useContext } from 'react';
 import '../App.css';
 import * as fcl from '@onflow/fcl';
 import FlowContext from '../context/FlowContext';
+import SuccessContainer from '../containers/SuccessContainer';
+import InProcess from '../containers/InProcessContainer';
+import FailContainer from '../containers/FailContainer';
 
 function EmeraldID(props) {
     const flow = useContext(FlowContext);
-    const [message, setMessage] = useState(null);
     const [status, setStatus] = useState("");
+    const [classname, setClassname] = useState('Login');
 
     useEffect(() => {
         fcl.currentUser().subscribe(flow.setUser);
@@ -17,35 +20,36 @@ function EmeraldID(props) {
     const doStuff = async () => {
         
         const exists = await flow.checkEmeraldID();
+        setClassname('');
         console.log(exists);
         if (!exists) {
+            setStatus('InProcess');
             createEmeraldID();
         } else {
-            setMessage("You have already set up your EmeraldID :)");
-            setStatus("green");
+            setStatus('Success');
         }
         
     }
 
     const createEmeraldID = async () => {
-        setMessage('Setting up your EmeraldID. Please wait ~30 seconds.');
-        setStatus("blue");
         let result = await flow.createEmeraldID();
         if (result) {
-            setMessage('Success! Please go back to Discord and click `Verify` again.');
-            setStatus("green");
+            setStatus("Success");
         } else {
-            setMessage('Failed to create EmeraldID.');
-            setStatus("red");
+            setStatus("Fail");
         }
     };
 
     return (
-        <div className="App">
-            {flow.user && flow.user.loggedIn && message 
-                ? <h1 className={status}>{message}</h1>
-                : null}
-            
+        <div className={classname}>
+            {status === 'Success' 
+                ? <SuccessContainer />
+                : status === 'InProcess'
+                ? <InProcess />
+                : status === 'Fail'
+                ? <FailContainer />
+                : null
+            }
             {flow.user && flow.user.loggedIn && status === ""
                 ? <button className="button-9 green" onClick={() => doStuff()}>Create EmeraldID</button> 
                 : null}

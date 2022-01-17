@@ -7,6 +7,9 @@ import Mainnet from './components/Mainnet.js';
 import Testnet from './components/Testnet.js';
 import EmeraldID from './components/EmeraldID.js';
 import Test from './components/Test.js';
+import SuccessContainer from './containers/SuccessContainer.js';
+import FailContainer from './containers/FailContainer.js';
+import InProcess from './containers/InProcessContainer';
 
 function App() {
   return (
