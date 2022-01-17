@@ -1,15 +1,10 @@
 import emeraldLogo from "../images/emerald_logo.png";
 import { Transaction } from '../components/Transaction';
-const InProcess = (props) => {
 
-  console.log('InProcess', props)
+const InProcess = (props) => {
 
     return (
         <main className="App inProcess">
-            
-            <header>
-                <h1>EMERALD BOT</h1>
-            </header>
 
             <section className="inProcessSection">
                 <div className="card">
@@ -17,9 +12,9 @@ const InProcess = (props) => {
                     <div className="card-shape1"></div>
                     <div className="card-shape2"></div>
                     <div className="card-shape3"></div>
-                    <div className="text textInProcess">
+                    <div className="text">
                         <h1>Setting up your EmeraldID</h1>
-                        <Transaction transactionStatus={props.transactionStatus} />
+                        <Transaction transactionStatus={props.transactionStatus} txId={props.txId} />
                     </div>
                 </div>
             </section>

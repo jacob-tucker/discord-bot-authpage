@@ -6,10 +6,6 @@ const FailContainer = () => {
     return (
         <main className="App fail">
 
-            <header>
-                <h1>EMERALD BOT</h1>
-            </header>
-
             <section className="failSection">
                 <div className="card failCard">
                     <div className="card-shape1"></div>

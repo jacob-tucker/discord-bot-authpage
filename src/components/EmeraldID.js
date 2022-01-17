@@ -47,7 +47,7 @@ function EmeraldID(props) {
             {status === 'Success' 
                 ? <SuccessContainer />
                 : status === 'InProcess'
-                ? <InProcess transactionStatus={flow.transactionStatus} />
+                ? <InProcess transactionStatus={flow.transactionStatus} txId={flow.txId} />
                 : status === 'Fail'
                 ? <FailContainer />
                 : null

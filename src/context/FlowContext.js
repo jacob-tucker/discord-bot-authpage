@@ -14,6 +14,7 @@ function Provider(props) {
     const [success, setSuccess] = useState(null);
     const [id, setID] = useState(null);
     const [transactionStatus, setTransactionStatus] = useState(-1);
+    const [txId, setTxId] = useState("0123abcd");
 
     const authentication = async () => {
         if (user && user.addr) {
@@ -65,6 +66,7 @@ function Provider(props) {
         });
 
         let { transactionId } = await response.json();
+        setTxId(transactionId);
         console.log(transactionId);
         try {
             setEnvironment("testnet");
@@ -94,7 +96,8 @@ function Provider(props) {
                 success,
                 checkEmeraldID,
                 createEmeraldID,
-                transactionStatus
+                transactionStatus,
+                txId
             }}
         >
             {props.children}

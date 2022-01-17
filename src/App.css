@@ -44,7 +44,7 @@ section{
   margin: auto;
 }
 
-.card{
+.sucessSection > .card, .failSection > .card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,6 +60,20 @@ section{
   animation: expandCard 3s ease forwards;
 }
 
+.inProcessSection > .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-flow: column nowrap;
+  position: absolute;
+  top:0;
+  width: 600px;
+  margin-left: -300px;
+  padding-top: 150px;
+  text-align: center;
+  animation: expandCard 3s ease forwards;
+}
+
 .card-shape1{
   position: absolute;
   width: 442px;
@@ -68,6 +82,19 @@ section{
   opacity: 0.6;
   top: -155px;
   left: -34px;
+  border-radius: 150px;
+  background: #000000;
+  animation: rotate 30s linear infinite;
+}
+
+.inProcessSection > .card > .card-shape1 {
+  position: absolute;
+  width: 442px;
+  height: 431px;
+  left: 75px;
+  z-index: 0;
+  opacity: 0.6;
+  top: -190px;
   border-radius: 150px;
   background: #000000;
   animation: rotate 30s linear infinite;
@@ -86,6 +113,19 @@ section{
   animation : rotate 25s linear infinite;
 }
 
+.inProcessSection > .card > .card-shape2 {
+  background: #000000;
+  position: absolute;
+  left: 75px;
+  border-radius: 180px;
+  height: 428px;
+  width: 492px;
+  top: -200px;
+  opacity : 0.4;
+  z-index : 2;
+  animation : rotate 25s linear infinite;
+}
+
 .card-shape3{
   background-color: #000000;
   position: absolute;
@@ -97,7 +137,19 @@ section{
   opacity: 0.3;
   z-index: 3;
   animation: rotate 32s linear infinite;
+}
 
+.inProcessSection > .card > .card-shape3 {
+  background-color: #000000;
+  position: absolute;
+  border-radius: 180px;
+  left: 75px;
+  height: 444px;
+  width: 517px;
+  top: -220px;
+  opacity: 0.3;
+  z-index: 3;
+  animation: rotate 32s linear infinite;
 }
 
 img{
@@ -140,6 +192,11 @@ footer::after{
 
 .footerDiv{
   animation: popup 3s ease-in;
+}
+
+.flowscan{
+  text-decoration: none;
+  color: black;
 }
 
 a{
@@ -196,7 +253,7 @@ i:hover{
 
 @keyframes expandCard {
     0% {
-      transform: translateY(1400px);
+      transform: translateY(-1400px);
     }
     100% {
       transform: translateY(0px);
@@ -235,25 +292,32 @@ i:hover{
 /*----------------  SETTING UP ---------------- */
 
 .inProcess{
-  background-color: rgb(16, 129, 194);
+  background-color: rgb(79, 198, 185);
 }
 
 .logoEmeraldBig{
   z-index: 5;
   position: absolute;
-  top: 85px;
-  left: 97px;
+  top: 40px;
+  left :50%;
+  margin-left: -74px;
   width: 148px;
   animation: justRotate 4s linear infinite;
 }
 
 .inProcess .text{
   top: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.inProcess .text h1{
-  color: rgb(16, 129, 194);
-  font-size: 25px;
+.inProcess .text > h1{
+  color: #0d211f;
+  font-size: 35px;
+  margin-top: 100px;
+  margin-bottom: 20px;
 }
 
 @keyframes justRotate {
@@ -318,8 +382,19 @@ i:hover{
 }
 */
 
+.loadingTx > h1 {
+  background-color: rgb(27 40 50);
+  color: rgb(250, 250, 250);
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 5px;
+}
 
-
+@media screen and (max-width: 600px) {
+  .inProcess .text > h1{
+    font-size: 20px;
+  }
+}
 
 
 
@@ -393,3 +468,9 @@ i:hover{
   padding: 10px;
   background-color: rgb(67, 132, 206);
 } */
+
+.sublink {
+  font-size:0.65rem;
+  text-decoration:underline;
+  padding-top: 20px;
+}

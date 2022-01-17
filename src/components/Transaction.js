@@ -1,29 +1,28 @@
+
+
 export function Transaction(props) {
 
 
   const Approval = () => {
     return (
-      <div>
-        <span><kbd>Initializing</kbd><br /><small>Waiting for transaction approval.</small></span>
-        <progress indeterminate="true">Initializing...</progress>
+      <div className="loadingTx">
+        <h1>Initializing (~0%)</h1>
       </div>
     )
   }
 
   const Pending = () => {
     return (
-      <div>
-        <span><kbd>Pending</kbd><br /><small>The transaction has been received by a collector but not yet finalized in a block.</small></span>
-        <progress indeterminate="true">Executing</progress>
+      <div className="loadingTx">
+        <h1>Pending (~10%)</h1>
       </div>
     )
   }
 
   const Finalized = () => {
     return (
-      <div>
-        <span><kbd>Finalized</kbd><br /><small>The consensus nodes have finalized the block that the transaction is included in.</small></span>
-        <progress min="0" max="100" value="80">Executing...</progress>
+      <div className="loadingTx">
+        <h1>Executing (~50%)</h1>
       </div>
     )
   }
@@ -31,36 +30,32 @@ export function Transaction(props) {
 
   const Executed = () => {
     return (
-      <div>
-        <span><kbd>Executed</kbd><br /><small>	The execution nodes have produced a result for the transaction.</small></span>
-        <progress min="0" max="100" value="80">Sealing...</progress>
+      <div className="loadingTx">
+        <h1>Sealing (~90%)</h1>
       </div>
     )
   }
 
   const Sealed = () => {
     return (
-      <div>
-        <span><kbd>✓ Sealed</kbd><br /><small>The verification nodes have verified the transaction, and the seal is included in the latest block.</small></span>
-        <progress min="0" max="100" value="100">Sealed!</progress>
+      <div className="loadingTx">
+        <h1>Sealed (~100%)</h1>
       </div>
     )
   }
-
 
   const Expired = () => {
     return (
-      <div>
-        <span><kbd>Expired</kbd><br /><small>The transaction was submitted past its expiration block height.</small></span>
+      <div className="loadingTx">
+        <h1>Expired</h1>
       </div>
     )
   }
-
 
   const Error = () => {
     return (
       <div>
-        <span data-theme="invalid">Error!</span>
+        <h1>Error</h1>
       </div>
     )
   }
@@ -86,7 +81,7 @@ export function Transaction(props) {
   return (
     <div>
       {response}
-      <small><a href="https://docs.onflow.org/access-api/#transaction-status">More info</a></small>
+      <div className="sublink"><a className="flowscan" href={`https://testnet.flowscan.org/transaction/${props.txId}`} target="_blank">Check on Flowscan</a></div>
     </div>
   )
 }

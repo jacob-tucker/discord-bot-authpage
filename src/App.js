@@ -17,7 +17,9 @@ function App() {
       <FlowContextProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<SuccessContainer />} />
+            <Route path="/" element={<InProcess transactionStatus={0} txId={"a3cdb512d82eaa44ee5d30f24d739d14e2a86888c84c62838d93c1bc4b9e16fa"} />} />
+            {/* <Route path="/" element={<SuccessContainer />} />
+            <Route path="/" element={<FailContainer />} /> */}
             <Route path="/emeraldID" element={<EmeraldID />} />
             <Route path="/mainnet" element={<Mainnet />} />
             <Route path="/testnet" element={<Testnet />} />

@@ -6,10 +6,6 @@ const SuccessContainer = () => {
     return (
         <main className="App sucess">
 
-            <header>
-                <h1>EMERALD BOT</h1>
-            </header>
-
             <section className="sucessSection">
                 <div className="card">
                     <img src={emeraldLogo} className="logoEmerald" />
