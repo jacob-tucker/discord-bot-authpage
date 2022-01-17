@@ -32,12 +32,14 @@ function EmeraldID(props) {
     }
 
     const createEmeraldID = async () => {
-        let result = await flow.createEmeraldID();
+        const result = await flow.createEmeraldID();
+
         if (result) {
             setStatus("Success");
         } else {
             setStatus("Fail");
         }
+
     };
 
     return (
@@ -45,7 +47,7 @@ function EmeraldID(props) {
             {status === 'Success' 
                 ? <SuccessContainer />
                 : status === 'InProcess'
-                ? <InProcess />
+                ? <InProcess transactionStatus={flow.transactionStatus} txId={flow.txId} />
                 : status === 'Fail'
                 ? <FailContainer />
                 : null
