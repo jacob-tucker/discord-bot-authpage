@@ -1,9 +1,10 @@
 import * as fcl from '@onflow/fcl'
 
+// sign transaction with verify the cadence code
 const signWithVerify = async (args) => {
   const response = await fetch(
-    // `https://damp-ridge-15827.herokuapp.com/api/signWithVerify`,
-    `http://localhost:5000/api/signWithVerify`,
+    `https://damp-ridge-15827.herokuapp.com/api/signWithVerify`,
+    // `http://localhost:5000/api/signWithVerify`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -20,8 +21,8 @@ const signWithVerify = async (args) => {
 
 const getAccountSigningKey = async () => {
   const response = await fetch(
-    // `https://damp-ridge-15827.herokuapp.com/api/getAccount`,
-    `http://localhost:5000/api/getAccount`,
+    `https://damp-ridge-15827.herokuapp.com/api/getAccount`,
+    // `http://localhost:5000/api/getAccount`,
     {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -33,8 +34,8 @@ const getAccountSigningKey = async () => {
 export const getScriptByScriptName = async (scriptName) => {
   try {
     const response = await fetch(
-      // `https://damp-ridge-15827.herokuapp.com/api/getScript/${scriptName}`,
-      `http://localhost:5000/api/getScript/${scriptName}`,
+      `https://damp-ridge-15827.herokuapp.com/api/getScript/${scriptName}`,
+      // `http://localhost:5000/api/getScript/${scriptName}`,
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
