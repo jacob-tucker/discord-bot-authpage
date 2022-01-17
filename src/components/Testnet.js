@@ -10,13 +10,13 @@ function Testnet(props) {
         fcl.currentUser().subscribe(flow.setUser);
         fcl.config()
             .put('discovery.wallet', 'https://flow-wallet-testnet.blocto.app/authn')
-    }, [])
+    }, [flow.setUser])
 
     useEffect(() => {
         if (flow.user && flow.user.addr) {
             flow.sendAuthPOST("testnet");
         }
-    }, [flow.user]);
+    }, [flow.user, flow]);
 
     return (
         <div className="App">

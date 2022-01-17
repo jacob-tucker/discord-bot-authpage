@@ -1,5 +1,6 @@
 {
   "name": "bloctosignin",
+  "license": "UNLICENSED",
   "version": "0.1.0",
   "private": true,
   "proxy": "https://damp-ridge-15827.herokuapp.com",

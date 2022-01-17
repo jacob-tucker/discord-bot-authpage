@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import '../App.css';
 import * as fcl from '@onflow/fcl';
 import FlowContext from '../context/FlowContext';
+import SucessContainer from '../containers/SucessContainer';
+import FailContainer from '../containers/FailContainer';
 
 function EmeraldID(props) {
     const flow = useContext(FlowContext);
@@ -32,15 +34,20 @@ function EmeraldID(props) {
     }, [flow.user]);
 
     const createEmeraldID = async () => {
-        setMessage('Setting up your EmeraldID. Please wait ~30 seconds.');
-        setStatus("blue");
-        let response = await flow.createEmeraldID();
+
+        let response = 'inProcess'
+        // setMessage('Setting up your EmeraldID. Please wait ~30 seconds.');
+        // setStatus("blue");
+        response = await flow.createEmeraldID();
+
         if (response === 'Success') {
-            setMessage('Success! Please go back to Discord and click `Verify` again.');
-            setStatus("green");
+            response = 'Sucess';
+            //setMessage('Success! Please go back to Discord and click `Verify` again.');
+            //setStatus("green");
         } else {
             setMessage(response);
-            setStatus("red");
+            response = 'Fail'
+            //setStatus("red");
         }
     }
 
@@ -49,6 +56,13 @@ function EmeraldID(props) {
             {flow.user && flow.user.loggedIn && message 
                 ? <h1 className={status}>{message}</h1>
                 : null}
+            
+            {response == 'inProcess' ? < InProcess /> : null}
+            {response == 'Sucess' ? <SucessContainer/> : null}
+            {response == 'Fail' ? <FailContainer /> : null}
+            
+            
+
             <button className="button-9" onClick={() => flow.authentication()}>{flow.user && !flow.user.loggedIn ? "Log in with Blocto" : "Log out"}</button>
         </div>
     );
