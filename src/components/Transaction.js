@@ -81,7 +81,7 @@ export function Transaction(props) {
   return (
     <div>
       {response}
-      <div className="sublink"><a className="flowscan" href={`https://testnet.flowscan.org/transaction/${props.txId}`} target="_blank">Check on Flowscan</a></div>
+      <div className="sublink"><a className="flowscan" href={`https://flowscan.org/transaction/${props.txId}`} target="_blank">Check on Flowscan</a></div>
     </div>
   )
 }

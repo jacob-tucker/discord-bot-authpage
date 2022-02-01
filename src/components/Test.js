@@ -4,9 +4,6 @@ import * as fcl from '@onflow/fcl';
 import * as t from '@onflow/types';
 import { serverAuthorization } from "../helpers/serverAuth.js";
 
-fcl.config()
-  .put('discovery.wallet', 'https://flow-wallet-testnet.blocto.app/authn')
-
 function Test(props) {
   const [user, setUser] = useState();
 
