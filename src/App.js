@@ -3,8 +3,6 @@ import './App.css';
 
 import { Provider as FlowContextProvider } from './context/FlowContext.js';
 
-import Mainnet from './components/Mainnet.js';
-import Testnet from './components/Testnet.js';
 import EmeraldID from './components/EmeraldID.js';
 import Test from './components/Test.js';
 import SuccessContainer from './containers/SuccessContainer.js';
@@ -21,8 +19,6 @@ function App() {
             {/* <Route path="/" element={<SuccessContainer />} />
             <Route path="/" element={<FailContainer />} /> */}
             <Route path="/emeraldID" element={<EmeraldID />} />
-            <Route path="/mainnet" element={<Mainnet />} />
-            <Route path="/testnet" element={<Testnet />} />
           </Routes>
         </BrowserRouter>
       </FlowContextProvider>

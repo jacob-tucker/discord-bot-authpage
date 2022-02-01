@@ -13,11 +13,9 @@ function EmeraldID(props) {
 
     useEffect(() => {
         fcl.currentUser().subscribe(flow.setUser);
-        fcl.config()
-            .put('discovery.wallet', 'https://flow-wallet.blocto.app/authn');
     }, []);
 
-    const doStuff = async () => {
+    const setupProcess = async () => {
         
         const exists = await flow.checkEmeraldID();
         setClassname('');
@@ -32,15 +30,24 @@ function EmeraldID(props) {
     }
 
     const createEmeraldID = async () => {
-        const result = await flow.createEmeraldID();
+        const result = await flow.createEmeraldIDWithMultiPartSign();
 
         if (result) {
             setStatus("Success");
         } else {
             setStatus("Fail");
         }
-
     };
+
+    const resetEmeraldID = async () => {
+        const result = await flow.resetEmeraldIDWithMultiPartSign();
+
+        if (result) {
+            console.log("Your EmeraldID has been reset.")
+        } else {
+            console.log("There was an error resetting your EmeraldID.")
+        }
+    }
 
     return (
         <div className={classname}>
@@ -53,7 +60,11 @@ function EmeraldID(props) {
                 : null
             }
             {flow.user && flow.user.loggedIn && status === ""
-                ? <button className="button-9 green" onClick={() => doStuff()}>Create EmeraldID</button> 
+                ? 
+                <div>
+                    <button className="button-9 green" onClick={() => setupProcess()}>Create EmeraldID</button> 
+                    <button className="button-9" onClick={() => resetEmeraldID()}>Reset EmeraldID</button>
+                </div>
                 : null}
 
             {flow.user && !flow.user.loggedIn && status === "" 
