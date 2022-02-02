@@ -34,7 +34,7 @@ function Reset(props) {
             }
             {flow.user && flow.user.loggedIn && status === ""
                 ? 
-                    <button className="button-9" onClick={() => resetEmeraldID()}>Reset EmeraldID</button>
+                    <button className="button-9 red" onClick={() => resetEmeraldID()}>Reset EmeraldID</button>
                 : null}
 
             {flow.user && !flow.user.loggedIn && status === "" 
