@@ -74,8 +74,6 @@ export function Transaction(props) {
     response = <Sealed />
   } else if (props.transactionStatus === 5) {
     response = <Expired />
-  } else {
-    response = <Error />
   }
 
   return (

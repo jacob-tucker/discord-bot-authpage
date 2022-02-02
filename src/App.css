@@ -407,6 +407,12 @@ i:hover{
 
 
 /* CSS */
+.loggedInButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .button-9 {
   appearance: button;
   backface-visibility: hidden;

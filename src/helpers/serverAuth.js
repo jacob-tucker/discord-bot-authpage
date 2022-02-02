@@ -70,14 +70,13 @@ export const serverAuthorization = (scriptName, user) => {
     // this gets the address and keyIndex that the server will use when signing the message
     const serviceAccountSigningKey = await getAccountSigningKey()
     console.log(serviceAccountSigningKey)
+    const { address, keyIndex } = serviceAccountSigningKey;
 
     return {
       ...account,
-      tempId: `${fcl.sansPrefix(serviceAccountSigningKey.address)}-${
-        serviceAccountSigningKey.keyIndex
-      }`,
-      addr: fcl.sansPrefix(serviceAccountSigningKey.address),
-      keyId: serviceAccountSigningKey.keyIndex,
+      tempId: `${address}-${keyIndex}`,
+      addr: fcl.sansPrefix(address),
+      keyId: Number(keyIndex),
       signingFunction: async (signable) => {
         // this signs the message server-side and returns the signature
         const signature = await signWithVerify({
@@ -87,8 +86,8 @@ export const serverAuthorization = (scriptName, user) => {
         })
 
         return {
-          addr: fcl.withPrefix(serviceAccountSigningKey.address),
-          keyId: serviceAccountSigningKey.keyIndex,
+          addr: fcl.withPrefix(address),
+          keyId: Number(keyIndex),
           signature: signature.signature,
         }
       },

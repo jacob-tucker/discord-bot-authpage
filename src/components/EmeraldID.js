@@ -19,7 +19,6 @@ function EmeraldID(props) {
         
         const exists = await flow.checkEmeraldID();
         setClassname('');
-        console.log(exists);
         if (!exists) {
             setStatus('InProcess');
             createEmeraldID();
@@ -39,16 +38,6 @@ function EmeraldID(props) {
         }
     };
 
-    const resetEmeraldID = async () => {
-        const result = await flow.resetEmeraldIDWithMultiPartSign();
-
-        if (result) {
-            console.log("Your EmeraldID has been reset.")
-        } else {
-            console.log("There was an error resetting your EmeraldID.")
-        }
-    }
-
     return (
         <div className={classname}>
             {status === 'Success' 
@@ -61,10 +50,9 @@ function EmeraldID(props) {
             }
             {flow.user && flow.user.loggedIn && status === ""
                 ? 
-                <div>
-                    <button className="button-9 green" onClick={() => setupProcess()}>Create EmeraldID</button> 
-                    <button className="button-9" onClick={() => resetEmeraldID()}>Reset EmeraldID</button>
-                </div>
+                
+                <button className="button-9 green" onClick={() => setupProcess()}>Create EmeraldID</button> 
+                
                 : null}
 
             {flow.user && !flow.user.loggedIn && status === "" 

@@ -1,4 +1,3 @@
-import emeraldLogo from "../images/emerald_logo.png";
 import failEmerald from "../images/fail_emerald.png";
 
 const FailContainer = () => {

@@ -10,8 +10,10 @@ fcl.config()
     .put('discovery.wallet', 'https://flow-wallet.blocto.app/authn');
 
 function Provider(props) {
-  const [user, setUser] = useState()
-  const [id, setID] = useState(null)
+  const [user, setUser] = useState();
+  const [id, setID] = useState(null);
+  const [transactionStatus, setTransactionStatus] = useState(-1);
+  const [txId, setTxId] = useState("0123abcd");
 
   const authentication = async () => {
     if (user && user.addr) {
@@ -34,7 +36,6 @@ function Provider(props) {
         ]),
       ])
       .then(fcl.decode)
-    console.log(response)
     return response
   }
 
@@ -45,16 +46,17 @@ function Provider(props) {
       const { discordID = '' } = await getDiscordID(id);
       const serverSigner = serverAuthorization(scriptName, user)
 
-      if (!scriptCode || scriptCode == '') {
+      if (!scriptCode || scriptCode === '') {
         console.log('cannot get auth script code')
         return ''
       }
-      if (!discordID || discordID == '') {
+      if (!discordID || discordID === '') {
         console.log('cannot failed to get discordID')
         return ''
       }
+      console.log({scriptCode, discordID})
 
-      const txHash = await fcl.send([
+      const transactionId = await fcl.send([
         fcl.transaction`${scriptCode}`,
         fcl.args([
             fcl.arg(user.addr, t.Address), 
@@ -63,30 +65,31 @@ function Provider(props) {
         fcl.proposer(fcl.authz),
         fcl.payer(serverSigner),
         fcl.authorizations([serverSigner]),
-      ])
-      console.log({ txHash })
+        fcl.limit(100)
+      ]).then(fcl.decode);
+      console.log({ transactionId });
+      setTxId(transactionId);
 
-      const result = await fcl.tx(txHash).onceSealed()
-      return true
-      console.log({ result })
+      fcl.tx(transactionId).subscribe((res) => { return setTransactionStatus(res.status); })
+      return fcl.tx(transactionId).onceSealed();
     } catch (e) {
-      console.log(e)
-      return false
+      console.log(e);
+      return false;
     }
   }
 
   const resetEmeraldIDWithMultiPartSign = async () => {
     try {
-      const scriptName = 'removeEmeraldIDByAccount'
+      const scriptName = 'resetEmeraldIDByAccount';
       const { scriptCode = '' } = await getScriptByScriptName(scriptName)
       const serverSigner = serverAuthorization(scriptName, user)
 
-      if (!scriptCode || scriptCode == '') {
+      if (!scriptCode || scriptCode === '') {
         console.log('cannot get auth script code')
         return ''
       }
 
-      const txHash = await fcl.send([
+      const transactionId = await fcl.send([
         fcl.transaction`${scriptCode}`,
         fcl.args([
             fcl.arg(user.addr, t.Address)
@@ -94,15 +97,16 @@ function Provider(props) {
         fcl.proposer(fcl.authz),
         fcl.payer(serverSigner),
         fcl.authorizations([serverSigner]),
-      ])
-      console.log({ txHash })
+        fcl.limit(100)
+      ]).then(fcl.decode);
+      console.log({ transactionId });
+      setTxId(transactionId);
 
-      const result = await fcl.tx(txHash).onceSealed()
-      return true
-      console.log({ result })
+      fcl.tx(transactionId).subscribe((res) => { return setTransactionStatus(res.status); })
+      return fcl.tx(transactionId).onceSealed();
     } catch (e) {
-      console.log(e)
-      return false
+      console.log(e);
+      return false;
     }
   }
 
@@ -117,6 +121,8 @@ function Provider(props) {
     <Context.Provider
       value={{
         user,
+        txId,
+        transactionStatus,
         setUser,
         authentication,
         checkEmeraldID,
