@@ -424,8 +424,7 @@ i:hover{
   color: #fff;
   cursor: pointer;
   font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
-  font-size: 100%;
-  height: 44px;
+  font-size: 20px;
   line-height: 1.15;
   margin: 12px 0 0;
   outline: none;
@@ -439,8 +438,8 @@ i:hover{
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  width: 20%;
-  height: 10%;
+  width: 300px;
+  height: 150px;
 }
 
 .button-9:disabled {
